@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APNA_HISAAB | Team_Unofficials </title>
+    <title>APNA_HISAAB | Team_Unofficials</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
     <style>
-        /* CSS for color management */
+        /* CSS Variables for easy color management */
         :root {
-            --primary: #2b6cb0; /* Blue */
-            --income: #38a169;  /* Green */
-            --expense: #e53e3e; /* Red */
-            --bg-color: #f4f7f6; /* Off-white background */
+            --primary: #2b6cb0;
+            /* Professional Blue */
+            --income: #38a169;
+            /* Green */
+            --expense: #e53e3e;
+            /* Red */
+            --bg-color: #f4f7f6;
+            /* Off-white background */
             --card-bg: #ffffff;
             --text-main: #2d3748;
             --text-muted: #718096;
@@ -25,7 +30,8 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif; /* Clean font */
+            font-family: 'Inter', sans-serif;
+            /* Clean font */
         }
 
         body {
@@ -72,10 +78,17 @@
             transition: 0.2s;
         }
 
-        .btn:hover { background-color: #2c5282; }
-        
-        .btn-reset { background-color: var(--expense); }
-        .btn-reset:hover { background-color: #c53030; }
+        .btn:hover {
+            background-color: #2c5282;
+        }
+
+        .btn-reset {
+            background-color: var(--expense);
+        }
+
+        .btn-reset:hover {
+            background-color: #c53030;
+        }
 
         /* Grid Layout */
         .dashboard {
@@ -85,7 +98,11 @@
         }
 
         @media (max-width: 768px) {
-            .dashboard { grid-template-columns: 1fr; } /* Stacks on mobile */
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            /* Stacks on mobile */
         }
 
         .card {
@@ -124,13 +141,30 @@
             font-weight: 700;
         }
 
-        .text-green { color: var(--income); }
-        .text-red { color: var(--expense); }
-        .text-blue { color: var(--primary); }
+        .text-green {
+            color: var(--income);
+        }
+
+        .text-red {
+            color: var(--expense);
+        }
+
+        .text-blue {
+            color: var(--primary);
+        }
 
         /* Form Inputs */
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 14px; margin-bottom: 5px; font-weight: 500;}
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
         .form-control {
             width: 100%;
             padding: 10px;
@@ -170,16 +204,17 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
-       <header>
-        <div>
-            <h1>APNA_HISAAB</h1>
-            <p>Created by Team_Unofficials | IT-1</p>
-        </div>
-    <button class="btn btn-reset" onclick="resetData()">Clear Data</button>
-</header>
+        <header>
+            <div class="brand">
+                <h1>Expense Tracker</h1>
+                <p>Created by Team Unofficials | IT-1</p>
+            </div>
+            <button class="btn btn-reset" onclick="resetData()">Clear Data</button>
+        </header>
 
         <div class="dashboard">
             <div class="card">
@@ -213,14 +248,16 @@
                         <p id="money-minus" class="text-red">-₹0</p>
                     </div>
                 </div>
-                <canvas id="myChart" height="150"></canvas>
+                <div style="position: relative; height: 200px; width: 100%;">
+                    <canvas id="myChart"></canvas>
+                </div>
             </div>
         </div>
 
         <div class="card" style="margin-top: 24px;">
             <h2>Transaction History</h2>
             <ul id="list" class="transaction-list">
-                </ul>
+            </ul>
         </div>
 
         <footer>
@@ -244,7 +281,7 @@
         let transactions = localStorage.getItem('transactions') !== null ? localStorageTransactions : [];
 
         // Chart variable to keep track of the graph instance
-        let expenseChart; 
+        let expenseChart;
 
         // --- 3. ADDING A TRANSACTION ---
         function addTransaction(e) {
@@ -308,7 +345,7 @@
         }
 
         function resetData() {
-            if(confirm('Are you sure you want to clear all data?')) {
+            if (confirm('Are you sure you want to clear all data?')) {
                 transactions = [];
                 updateLocalStorage();
                 init();
@@ -322,9 +359,9 @@
         // --- 7. CHART.JS INTEGRATION ---
         function updateChart(income, expense) {
             const ctx = document.getElementById('myChart').getContext('2d');
-            
+
             // If a chart already exists, destroy it before making a new one to prevent glitching
-            if(expenseChart) { expenseChart.destroy(); }
+            if (expenseChart) { expenseChart.destroy(); }
 
             expenseChart = new Chart(ctx, {
                 type: 'doughnut',
@@ -353,5 +390,3 @@
 </body>
 
 </html>
-
-
